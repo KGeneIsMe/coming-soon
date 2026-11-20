@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smokies Local Guide: coming soon</title>
+<meta name="description" content="A local guide to the Great Smoky Mountains: where to eat, stay, hike and explore on both the Tennessee and North Carolina sides of the park. Coming soon.">
+<meta property="og:title" content="Smokies Local Guide">
+<meta property="og:description" content="A local guide to the Great Smoky Mountains. Coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://smokieslocalguide.com/">
+<meta name="theme-color" content="#1F3547">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #D7E3EC;
+    --sky-low: #EEE9E0;
+    --ink: #16283A;
+    --ink-soft: #3E5568;
+    --ridge-near: #1F3547;
+    --mist: #E8EEF2;
+    --mist-soft: #AFC1CF;
+    --dawn: #E3A23C;
+    --dawn-deep: #C9862A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--ridge-near);
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--dawn); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- sky and mountains ---------- */
+  .sky {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, var(--sky-top) 0%, #E4E8EA 45%, var(--sky-low) 70%);
+    overflow: hidden;
+  }
+  .wordmark {
+    padding: 1.75rem clamp(1.25rem, 5vw, 4rem) 0;
+    font-family: "Young Serif", Georgia, serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 0.6rem;
+    position: relative; z-index: 2;
+  }
+  .wordmark svg { width: 34px; height: 22px; }
+  .intro {
+    position: relative; z-index: 2;
+    padding: clamp(3rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem) 0;
+    max-width: 46rem;
+  }
+  h1 {
+    font-family: "Young Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+    text-wrap: balance;
+  }
+  .intro p { margin: 0 0 1rem; max-width: 34em; color: var(--ink-soft); font-size: 1.15rem; }
+  .status { color: var(--ink); font-weight: 700; }
+  .button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.85rem 1.6rem;
+    background: var(--dawn);
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 2px 0 var(--dawn-deep);
+    transition: background-color 0.15s, transform 0.15s;
+  }
+  .button:hover { background: #ECB054; }
+  .button:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--dawn-deep); }
+  .mountains {
+    margin-top: auto;
+    margin-bottom: -2px;  /* no hairline seam between the ridge and the section below */
+    width: 100%;
+    height: clamp(260px, 46vh, 520px);
+    display: block;
+  }
+  /* the one moment: ridges rise into place, far to near */
+  .ridge, .mist { transform-box: fill-box; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ridge { animation: rise 1.6s cubic-bezier(.2,.7,.2,1) both; }
+    .r0 { animation-delay: .05s; } .r1 { animation-delay: .2s; } .r2 { animation-delay: .35s; }
+    .r3 { animation-delay: .5s; } .r4 { animation-delay: .65s; }
+    .mist { animation: settle 2.4s ease-out .9s both; }
+    @keyframes rise { from { transform: translateY(18%); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes settle { from { opacity: 0; } to { opacity: 1; } }
+  }
+
+  /* ---------- what's coming ---------- */
+  .coming {
+    color: var(--mist);
+    padding: 1rem clamp(1.25rem, 5vw, 4rem) 4rem;
+    margin-top: -1px;
+  }
+  .coming-inner { max-width: 68rem; }
+  h2 {
+    font-family: "Young Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+  }
+  .coming > .coming-inner > p { max-width: 38em; color: var(--mist-soft); margin: 0 0 2.5rem; }
+  .sections {
+    list-style: none; padding: 0; margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.75rem 2.5rem;
+  }
+  .sections li { border-top: 1px solid rgba(232,238,242,.18); padding-top: 0.9rem; }
+  .sections strong { display: block; font-family: "Young Serif", Georgia, serif; font-weight: 400; font-size: 1.2rem; color: var(--mist); }
+  .sections span { color: var(--mist-soft); font-size: 0.98rem; }
+  .business {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(232,238,242,.18);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem;
+    justify-content: space-between;
+  }
+  .business p { margin: 0; max-width: 34em; color: var(--mist-soft); }
+  .business p b { color: var(--mist); font-weight: 700; }
+  .button.on-dark { margin-top: 0; }
+  footer {
+    padding: 1.5rem clamp(1.25rem, 5vw, 4rem) 2.5rem;
+    color: #8FA3B3;
+    font-size: 0.9rem;
+    background: #172938;
+  }
+  @media (max-width: 600px) {
+    .sky { min-height: 0; }
+    .intro p { font-size: 1.05rem; }
+    .mountains { height: 300px; margin-top: 2rem; }
+  }
+</style>
+</head>
+<body>
+  <header class="sky">
+    <div class="wordmark">
+      <svg viewBox="0 0 34 22" aria-hidden="true"><path d="M0 22 L9 8 L14 14 L21 3 L34 22 Z" fill="#45627A"/><path d="M0 22 L7 15 L12 18 L19 11 L27 17 L34 14 L34 22 Z" fill="#1F3547"/></svg>
+      Smokies Local Guide
+    </div>
+    <div class="intro">
+      <h1>A local guide to the Great Smoky Mountains</h1>
+      <p>Where to eat, stay, hike and explore around the national park, on both the Tennessee and North Carolina sides. Kept current and checked by hand.</p>
+      <p class="status">We're opening soon.</p>
+      <a class="button" href="mailto:info@smokieslocalguide.com?subject=More%20info%20about%20Smokies%20Local%20Guide">More info</a>
+    </div>
+    <svg class="mountains" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F2F5F7" stop-opacity="0"/>
+          <stop offset=".45" stop-color="#F2F5F7" stop-opacity=".4"/>
+          <stop offset="1" stop-color="#F2F5F7" stop-opacity=".1"/>
+        </linearGradient>
+      </defs>
+      <path class="ridge r0" fill="#B9C9D6" d="M0,560 L0,211.8 L8,214.4 L16,217.6 L24,219.8 L32,221.5 L40,225.4 L48,228.3 L56,231.5 L64,233.3 L72,235.7 L80,237.8 L88,240.9 L96,244.5 L104,246.4 L112,247.1 L120,247.6 L128,246.5 L136,246.5 L144,246.4 L152,245.1 L160,241.5 L168,239.4 L176,237.4 L184,236.6 L192,236.4 L200,235.1 L208,233.9 L216,231.4 L224,230.4 L232,229.1 L240,228.5 L248,228.1 L256,226.1 L264,224.6 L272,223.7 L280,225.7 L288,227.4 L296,229.4 L304,230.3 L312,231.7 L320,233.7 L328,235.9 L336,238.0 L344,238.6 L352,238.8 L360,238.5 L368,239.3 L376,240.8 L384,242.9 L392,244.4 L400,243.8 L408,243.9 L416,244.8 L424,246.3 L432,246.6 L440,246.4 L448,243.9 L456,242.4 L464,241.8 L472,242.2 L480,241.6 L488,241.5 L496,242.5 L504,242.3 L512,244.7 L520,247.9 L528,250.5 L536,251.9 L544,253.2 L552,255.8 L560,257.9 L568,262.3 L576,265.4 L584,269.4 L592,272.1 L600,276.1 L608,281.9 L616,287.1 L624,293.3 L632,297.5 L640,299.8 L648,303.0 L656,305.6 L664,308.1 L672,310.0 L680,311.5 L688,311.8 L696,311.3 L704,313.1 L712,313.9 L720,314.8 L728,314.8 L736,313.0 L744,311.1 L752,309.4 L760,308.0 L768,306.0 L776,302.8 L784,299.1 L792,297.1 L800,295.9 L808,295.3 L816,295.4 L824,294.2 L832,291.9 L840,291.3 L848,290.9 L856,291.4 L864,290.1 L872,288.1 L880,286.7 L888,284.7 L896,284.4 L904,285.6 L912,284.9 L920,284.3 L928,282.7 L936,281.9 L944,280.7 L952,279.6 L960,278.1 L968,274.3 L976,269.1 L984,264.6 L992,262.2 L1000,259.1 L1008,255.6 L1016,252.0 L1024,247.8 L1032,244.4 L1040,241.8 L1048,239.0 L1056,236.2 L1064,231.9 L1072,227.1 L1080,224.5 L1088,221.7 L1096,220.2 L1104,219.5 L1112,218.4 L1120,216.9 L1128,218.2 L1136,220.1 L1144,222.2 L1152,223.5 L1160,225.0 L1168,225.2 L1176,226.3 L1184,227.7 L1192,230.4 L1200,231.6 L1208,233.5 L1216,234.4 L1224,236.0 L1232,238.5 L1240,241.6 L1248,243.3 L1256,243.4 L1264,242.2 L1272,242.0 L1280,240.9 L1288,240.2 L1296,239.4 L1304,236.9 L1312,233.9 L1320,232.9 L1328,232.4 L1336,232.9 L1344,232.3 L1352,230.4 L1360,228.0 L1368,227.4 L1376,226.8 L1384,226.1 L1392,224.8 L1400,223.1 L1408,221.3 L1416,222.3 L1424,223.9 L1432,224.6 L1440,225.9 L1448,226.4 L1456,227.7 L1464,228.2 L1472,229.7 L1480,231.5 L1488,230.5 L1496,229.1 L1504,227.9 L1512,227.6 L1520,228.0 L1528,228.0 L1536,227.3 L1544,225.9 L1552,223.5 L1560,222.5 L1568,220.8 L1576,219.8 L1584,215.6 L1592,211.7 L1600,207.4 L1600,560 Z"/>
+      <rect class="mist m0" x="0" y="240" width="1600" height="320" fill="url(#mist)"/>
+      <path class="ridge r1" fill="#93AABD" d="M0,560 L0,301.4 L8,304.4 L16,306.3 L24,306.7 L32,308.0 L40,308.7 L48,310.8 L56,311.4 L64,312.5 L72,314.1 L80,314.0 L88,317.4 L96,323.0 L104,328.4 L112,333.6 L120,337.2 L128,339.5 L136,343.9 L144,347.4 L152,350.0 L160,351.0 L168,349.5 L176,348.4 L184,347.5 L192,348.4 L200,347.9 L208,346.3 L216,342.8 L224,339.6 L232,336.9 L240,333.0 L248,329.5 L256,324.7 L264,319.2 L272,314.9 L280,312.1 L288,310.9 L296,310.9 L304,309.4 L312,309.8 L320,310.0 L328,313.4 L336,316.1 L344,319.5 L352,322.7 L360,323.3 L368,323.5 L376,326.6 L384,329.0 L392,332.7 L400,334.8 L408,334.7 L416,335.6 L424,338.3 L432,340.5 L440,340.6 L448,338.1 L456,335.6 L464,333.8 L472,331.7 L480,330.8 L488,329.5 L496,326.4 L504,325.6 L512,324.7 L520,326.4 L528,329.3 L536,330.6 L544,332.4 L552,331.7 L560,333.0 L568,333.9 L576,335.9 L584,336.6 L592,334.9 L600,334.1 L608,334.3 L616,333.8 L624,335.1 L632,333.6 L640,329.5 L648,324.8 L656,320.3 L664,313.6 L672,309.1 L680,302.0 L688,292.8 L696,284.9 L704,277.7 L712,272.6 L720,268.3 L728,263.2 L736,258.9 L744,253.6 L752,250.5 L760,248.4 L768,246.2 L776,245.1 L784,242.4 L792,239.7 L800,240.1 L808,241.4 L816,242.4 L824,244.2 L832,245.9 L840,246.4 L848,246.5 L856,247.6 L864,249.7 L872,247.8 L880,245.5 L888,243.0 L896,241.3 L904,241.3 L912,241.5 L920,239.8 L928,240.4 L936,239.6 L944,241.7 L952,243.8 L960,247.5 L968,250.5 L976,252.4 L984,253.5 L992,257.9 L1000,262.8 L1008,268.0 L1016,273.0 L1024,278.2 L1032,284.0 L1040,289.2 L1048,297.2 L1056,303.7 L1064,307.3 L1072,308.9 L1080,310.3 L1088,310.9 L1096,311.4 L1104,311.2 L1112,310.6 L1120,307.7 L1128,304.5 L1136,303.1 L1144,303.3 L1152,302.8 L1160,301.2 L1168,299.1 L1176,296.4 L1184,294.8 L1192,292.8 L1200,292.9 L1208,291.7 L1216,292.4 L1224,291.7 L1232,294.3 L1240,297.9 L1248,302.7 L1256,304.6 L1264,308.0 L1272,309.0 L1280,310.9 L1288,312.9 L1296,314.5 L1304,314.3 L1312,312.7 L1320,311.3 L1328,312.2 L1336,312.7 L1344,313.2 L1352,313.0 L1360,312.6 L1368,311.2 L1376,311.4 L1384,312.8 L1392,313.3 L1400,313.4 L1408,312.6 L1416,313.3 L1424,317.0 L1432,320.9 L1440,325.6 L1448,330.6 L1456,335.6 L1464,341.5 L1472,347.3 L1480,354.2 L1488,359.8 L1496,362.5 L1504,365.5 L1512,366.1 L1520,369.6 L1528,371.1 L1536,372.7 L1544,372.9 L1552,370.9 L1560,369.9 L1568,368.8 L1576,367.2 L1584,365.6 L1592,361.3 L1600,355.0 L1600,560 Z"/>
+      <rect class="mist m1" x="0" y="290" width="1600" height="270" fill="url(#mist)"/>
+      <path class="ridge r2" fill="#6C879D" d="M0,560 L0,415.3 L8,412.9 L16,408.4 L24,405.6 L32,402.9 L40,403.0 L48,400.4 L56,397.6 L64,393.2 L72,390.2 L80,390.0 L88,389.0 L96,387.6 L104,383.6 L112,380.9 L120,380.3 L128,379.3 L136,382.2 L144,382.5 L152,383.3 L160,382.6 L168,380.3 L176,381.7 L184,381.3 L192,377.4 L200,372.6 L208,367.4 L216,360.3 L224,357.1 L232,353.9 L240,352.1 L248,347.5 L256,345.8 L264,345.2 L272,347.8 L280,352.7 L288,355.6 L296,357.8 L304,359.1 L312,361.4 L320,364.5 L328,367.7 L336,371.5 L344,371.2 L352,372.2 L360,373.1 L368,373.7 L376,375.3 L384,374.2 L392,369.6 L400,363.4 L408,359.0 L416,352.2 L424,349.3 L432,342.1 L440,335.5 L448,331.6 L456,326.7 L464,326.8 L472,326.8 L480,327.6 L488,326.0 L496,323.8 L504,321.1 L512,322.2 L520,320.2 L528,317.1 L536,312.6 L544,309.0 L552,305.4 L560,303.0 L568,300.5 L576,298.6 L584,292.7 L592,287.9 L600,284.4 L608,284.0 L616,280.6 L624,280.0 L632,277.0 L640,275.4 L648,276.7 L656,282.8 L664,288.1 L672,295.3 L680,301.9 L688,308.5 L696,316.6 L704,325.3 L712,332.6 L720,336.4 L728,338.4 L736,341.9 L744,344.8 L752,346.3 L760,350.2 L768,352.1 L776,352.9 L784,352.9 L792,354.6 L800,358.5 L808,361.2 L816,363.0 L824,361.2 L832,363.3 L840,364.5 L848,367.6 L856,373.0 L864,374.9 L872,376.8 L880,380.4 L888,384.0 L896,389.7 L904,391.7 L912,392.1 L920,387.9 L928,385.2 L936,381.5 L944,377.3 L952,373.7 L960,368.3 L968,363.8 L976,359.7 L984,357.6 L992,358.5 L1000,359.5 L1008,359.1 L1016,359.1 L1024,359.2 L1032,360.3 L1040,364.1 L1048,368.4 L1056,371.2 L1064,373.8 L1072,377.6 L1080,382.3 L1088,387.1 L1096,391.5 L1104,394.8 L1112,394.2 L1120,394.0 L1128,394.2 L1136,394.0 L1144,392.0 L1152,389.2 L1160,384.4 L1168,382.5 L1176,381.7 L1184,382.5 L1192,384.0 L1200,385.4 L1208,384.3 L1216,385.9 L1224,388.3 L1232,391.7 L1240,391.2 L1248,390.2 L1256,386.4 L1264,384.1 L1272,381.6 L1280,380.3 L1288,376.9 L1296,372.6 L1304,365.5 L1312,358.9 L1320,352.9 L1328,347.7 L1336,338.9 L1344,329.3 L1352,319.8 L1360,311.0 L1368,305.5 L1376,302.7 L1384,299.6 L1392,297.5 L1400,294.4 L1408,294.5 L1416,297.9 L1424,300.6 L1432,302.4 L1440,302.3 L1448,302.5 L1456,301.0 L1464,302.1 L1472,302.8 L1480,303.1 L1488,301.3 L1496,299.5 L1504,299.7 L1512,301.0 L1520,304.2 L1528,304.6 L1536,303.3 L1544,302.0 L1552,303.5 L1560,305.2 L1568,308.9 L1576,313.5 L1584,315.8 L1592,320.3 L1600,326.6 L1600,560 Z"/>
+      <rect class="mist m2" x="0" y="340" width="1600" height="220" fill="url(#mist)"/>
+      <path class="ridge r3" fill="#45627A" d="M0,560 L0,396.3 L8,400.2 L16,403.8 L24,406.4 L32,405.8 L40,401.4 L48,396.9 L56,395.2 L64,391.3 L72,389.9 L80,385.6 L88,381.1 L96,375.2 L104,374.3 L112,373.8 L120,373.5 L128,371.9 L136,366.9 L144,362.7 L152,361.6 L160,358.8 L168,359.2 L176,357.8 L184,354.3 L192,356.0 L200,356.9 L208,362.3 L216,365.7 L224,367.9 L232,367.7 L240,368.8 L248,370.5 L256,370.1 L264,371.7 L272,368.6 L280,367.6 L288,364.7 L296,366.2 L304,369.1 L312,370.9 L320,371.4 L328,370.2 L336,371.5 L344,371.9 L352,372.7 L360,374.7 L368,371.9 L376,370.9 L384,373.2 L392,377.3 L400,383.0 L408,389.0 L416,392.5 L424,398.6 L432,405.4 L440,412.6 L448,418.4 L456,423.1 L464,427.4 L472,429.4 L480,432.4 L488,436.9 L496,443.7 L504,447.1 L512,449.7 L520,451.4 L528,455.0 L536,458.4 L544,460.6 L552,459.3 L560,457.9 L568,453.4 L576,451.1 L584,450.3 L592,449.8 L600,446.7 L608,444.5 L616,443.7 L624,443.1 L632,445.2 L640,446.9 L648,447.2 L656,446.9 L664,443.3 L672,442.3 L680,443.7 L688,443.9 L696,444.6 L704,443.5 L712,442.8 L720,442.2 L728,446.4 L736,448.7 L744,446.8 L752,444.1 L760,440.9 L768,436.7 L776,436.0 L784,432.5 L792,427.8 L800,421.6 L808,417.1 L816,414.6 L824,413.4 L832,412.0 L840,410.4 L848,408.2 L856,406.1 L864,405.4 L872,403.9 L880,405.1 L888,403.5 L896,403.3 L904,402.3 L912,402.9 L920,407.5 L928,412.3 L936,416.7 L944,419.4 L952,421.1 L960,423.5 L968,428.3 L976,429.8 L984,429.8 L992,426.1 L1000,425.6 L1008,423.3 L1016,423.5 L1024,426.3 L1032,423.8 L1040,421.2 L1048,418.4 L1056,417.9 L1064,418.1 L1072,415.9 L1080,410.3 L1088,404.7 L1096,401.5 L1104,398.8 L1112,398.0 L1120,397.7 L1128,395.4 L1136,394.5 L1144,392.3 L1152,394.2 L1160,397.8 L1168,397.9 L1176,396.9 L1184,393.3 L1192,390.8 L1200,389.3 L1208,388.6 L1216,386.9 L1224,383.3 L1232,380.2 L1240,378.7 L1248,376.2 L1256,375.4 L1264,373.7 L1272,369.1 L1280,364.6 L1288,357.5 L1296,353.9 L1304,348.7 L1312,346.2 L1320,340.2 L1328,336.8 L1336,333.5 L1344,335.1 L1352,338.2 L1360,339.4 L1368,340.1 L1376,338.4 L1384,340.6 L1392,342.6 L1400,345.9 L1408,347.6 L1416,351.2 L1424,351.4 L1432,355.1 L1440,360.4 L1448,366.8 L1456,374.2 L1464,377.0 L1472,379.7 L1480,382.2 L1488,386.7 L1496,387.8 L1504,388.5 L1512,388.9 L1520,387.4 L1528,385.8 L1536,390.3 L1544,393.9 L1552,396.6 L1560,396.1 L1568,397.1 L1576,399.9 L1584,402.8 L1592,407.7 L1600,408.0 L1600,560 Z"/>
+      <rect class="mist m3" x="0" y="395" width="1600" height="165" fill="url(#mist)"/>
+      <path class="ridge r4" fill="#1F3547" d="M0,560 L0,434.0 L8,432.0 L16,428.4 L24,427.5 L32,425.3 L40,421.4 L48,418.6 L56,415.5 L64,419.7 L72,423.5 L80,427.8 L88,429.0 L96,429.3 L104,429.3 L112,433.3 L120,436.5 L128,436.4 L136,432.0 L144,431.3 L152,428.0 L160,429.7 L168,431.5 L176,434.4 L184,434.0 L192,434.8 L200,436.1 L208,439.2 L216,444.2 L224,447.9 L232,448.6 L240,446.2 L248,449.6 L256,455.5 L264,460.0 L272,467.1 L280,471.5 L288,475.6 L296,483.2 L304,490.2 L312,495.3 L320,500.9 L328,499.2 L336,499.4 L344,496.8 L352,497.1 L360,497.1 L368,496.6 L376,495.1 L384,493.7 L392,493.5 L400,494.1 L408,495.9 L416,496.7 L424,491.4 L432,489.0 L440,486.4 L448,487.8 L456,488.3 L464,488.5 L472,486.2 L480,485.8 L488,487.2 L496,491.3 L504,493.9 L512,495.2 L520,495.8 L528,492.6 L536,491.3 L544,488.8 L552,486.2 L560,484.6 L568,477.8 L576,474.7 L584,473.8 L592,472.6 L600,475.3 L608,475.8 L616,473.4 L624,472.5 L632,472.2 L640,473.9 L648,475.6 L656,475.0 L664,474.6 L672,475.1 L680,477.9 L688,483.1 L696,487.5 L704,491.5 L712,491.9 L720,493.9 L728,495.3 L736,496.6 L744,499.5 L752,496.6 L760,491.0 L768,485.1 L776,481.5 L784,480.0 L792,480.0 L800,475.8 L808,474.9 L816,469.7 L824,470.5 L832,468.8 L840,470.2 L848,464.1 L856,459.6 L864,454.6 L872,453.9 L880,455.3 L888,453.3 L896,453.7 L904,452.7 L912,450.1 L920,451.1 L928,452.3 L936,452.5 L944,448.5 L952,440.8 L960,434.8 L968,431.2 L976,427.1 L984,422.8 L992,418.2 L1000,414.2 L1008,411.7 L1016,412.2 L1024,414.8 L1032,416.4 L1040,415.2 L1048,414.5 L1056,412.2 L1064,413.9 L1072,417.4 L1080,421.9 L1088,422.6 L1096,424.0 L1104,428.5 L1112,432.3 L1120,440.3 L1128,446.8 L1136,449.1 L1144,451.3 L1152,452.0 L1160,452.9 L1168,454.0 L1176,454.3 L1184,454.0 L1192,449.8 L1200,448.6 L1208,451.5 L1216,455.1 L1224,458.2 L1232,461.7 L1240,462.1 L1248,462.9 L1256,464.8 L1264,469.9 L1272,470.0 L1280,469.8 L1288,469.9 L1296,470.7 L1304,473.5 L1312,478.7 L1320,483.4 L1328,483.0 L1336,484.7 L1344,484.5 L1352,484.0 L1360,484.6 L1368,483.6 L1376,478.4 L1384,471.5 L1392,466.6 L1400,465.5 L1408,464.6 L1416,464.5 L1424,462.6 L1432,462.0 L1440,463.7 L1448,466.6 L1456,469.8 L1464,471.2 L1472,469.6 L1480,470.3 L1488,471.9 L1496,473.5 L1504,479.3 L1512,482.3 L1520,485.2 L1528,485.4 L1536,490.9 L1544,496.1 L1552,499.1 L1560,501.3 L1568,500.3 L1576,495.8 L1584,495.4 L1592,495.4 L1600,493.8 L1600,560 Z"/>
+    </svg>
+  </header>
+
+  <main class="coming">
+    <div class="coming-inner">
+      <h2>What you'll find</h2>
+      <p>One place to plan a trip to the Smokies, covering Sevier, Blount and Cocke counties in Tennessee and Swain, Haywood and Graham counties in North Carolina.</p>
+      <ul class="sections">
+        <li><strong>Eat &amp; drink</strong><span>Pancake houses, barbecue, breweries and mountain diners.</span></li>
+        <li><strong>Places to stay</strong><span>Cabins, lodges, inns and campgrounds near the park.</span></li>
+        <li><strong>Outdoors &amp; adventure</strong><span>Trails, waterfalls, fishing, rafting and scenic drives.</span></li>
+        <li><strong>Attractions</strong><span>Shows, family fun and the big names in Pigeon Forge and Gatlinburg.</span></li>
+        <li><strong>History &amp; culture</strong><span>Old mill towns, Cherokee heritage, museums and historic sites.</span></li>
+        <li><strong>Weddings &amp; events</strong><span>Chapels, venues and the events worth planning a trip around.</span></li>
+        <li><strong>Shopping</strong><span>Craft shops, outfitters, outlets and local makers.</span></li>
+        <li><strong>Visitor essentials</strong><span>Visitor centers, park alerts, gas, groceries and getting around.</span></li>
+      </ul>
+      <div class="business">
+        <p><b>Own a business in the Smokies?</b> We'd like to hear from you about your listing before we open.</p>
+        <a class="button on-dark" href="mailto:info@smokieslocalguide.com?subject=My%20business%20listing">Email us about your listing</a>
+      </div>
+    </div>
+  </main>
+  <footer>&copy; 2026 Smokies Local Guide. Not affiliated with the National Park Service.</footer>
+</body>
+</html>
