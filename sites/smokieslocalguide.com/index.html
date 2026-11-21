@@ -41,8 +41,9 @@
   /* ---------- sky and mountains ---------- */
   .sky {
     position: relative;
-    min-height: 100vh;
-    min-height: 100svh;
+    /* a little shorter than the screen, so the next section peeks in and invites scrolling */
+    min-height: calc(100vh - 7rem);
+    min-height: calc(100svh - 7rem);
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, var(--sky-top) 0%, #E4E8EA 45%, var(--sky-low) 70%);
@@ -60,7 +61,7 @@
   .wordmark svg { width: 34px; height: 22px; }
   .intro {
     position: relative; z-index: 2;
-    padding: clamp(3rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem) 0;
+    padding: clamp(2rem, 7vh, 5rem) clamp(1.25rem, 5vw, 4rem) 0;
     max-width: 46rem;
   }
   h1 {
@@ -88,11 +89,27 @@
   }
   .button:hover { background: #ECB054; }
   .button:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--dawn-deep); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; margin-top: 1rem; }
+  .actions .button { margin-top: 0; }
+  .next {
+    color: var(--ink); font-weight: 700; text-decoration: underline;
+    text-underline-offset: 0.25em; text-decoration-thickness: 1px;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .next svg { width: 0.85em; height: 0.85em; }
+  .next:hover { text-decoration-thickness: 2px; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  /* shorter laptop screens: keep the mountains but let the next section show sooner */
+  @media (max-height: 920px) and (min-width: 601px) {
+    h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+    .mountains { height: clamp(180px, 30vh, 260px); }
+  }
   .mountains {
     margin-top: auto;
     margin-bottom: -2px;  /* no hairline seam between the ridge and the section below */
     width: 100%;
-    height: clamp(260px, 46vh, 520px);
+    height: clamp(220px, 38vh, 440px);
     display: block;
   }
   /* the one moment: ridges rise into place, far to near */
@@ -109,7 +126,7 @@
   /* ---------- what's coming ---------- */
   .coming {
     color: var(--mist);
-    padding: 1rem clamp(1.25rem, 5vw, 4rem) 4rem;
+    padding: 0.5rem clamp(1.25rem, 5vw, 4rem) 4rem;
     margin-top: -1px;
   }
   .coming-inner { max-width: 68rem; }
@@ -149,7 +166,7 @@
   @media (max-width: 600px) {
     .sky { min-height: 0; }
     .intro p { font-size: 1.05rem; }
-    .mountains { height: 300px; margin-top: 2rem; }
+    .mountains { height: 230px; margin-top: 0; }
   }
 </style>
 </head>
@@ -163,7 +180,10 @@
       <h1>A local guide to the Great Smoky Mountains</h1>
       <p>Where to eat, stay, hike and explore around the national park, on both the Tennessee and North Carolina sides. Kept current and checked by hand.</p>
       <p class="status">We're opening soon.</p>
-      <a class="button" href="mailto:info@smokieslocalguide.com?subject=More%20info%20about%20Smokies%20Local%20Guide">More info</a>
+      <div class="actions">
+        <a class="button" href="mailto:info@smokieslocalguide.com?subject=More%20info%20about%20Smokies%20Local%20Guide">More info</a>
+        <a class="next" href="#coming">See what's in the guide<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
     </div>
     <svg class="mountains" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <defs>
@@ -185,7 +205,7 @@
     </svg>
   </header>
 
-  <main class="coming">
+  <main class="coming" id="coming">
     <div class="coming-inner">
       <h2>What you'll find</h2>
       <p>One place to plan a trip to the Smokies, covering Sevier, Blount and Cocke counties in Tennessee and Swain, Haywood and Graham counties in North Carolina.</p>
